@@ -1,12 +1,26 @@
-const fs = require('fs')
-const path = require('path')
-const csv = require('csv-parser')
+const fs = require("fs")
+const path = require("path")
+const csv = require("csv-parser")
 
-const moment = require('moment')
+const express = require('express')
+
+const app = express()
+
+const moment = require("moment")
 
 const mysql = require("mysql2")
-const configs = require('./configs')
+const configs = require("./configs")
+const misc = require("./helpers/response")
 const conn = mysql.createConnection(configs.database.mysql)
+
+const bodyParser = require("body-parser")
+
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
+
+app.post("/get-crawl", async (req, res) => {
+  misc.response(res, 200, false, "")
+})
 
 var date = new Date()
 
